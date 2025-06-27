@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pelicula {
-    //private String nombre;
+
+    private final String nombre;
     private final Integer anioEstreno;
     private final String genero;
     private final String idiomaOriginal;
     private List <String> subtitulos = new ArrayList<>();
     
-    public Pelicula(String genero, Integer anioEstreno, String idiomaOriginal) {
+    public Pelicula(String nombre, String genero, Integer anioEstreno, String idiomaOriginal) {
+        this.nombre = nombre;
         this.genero = genero;
         this.anioEstreno = anioEstreno;
         this.idiomaOriginal = idiomaOriginal;
+    }
+    
+    public String getNombre() {
+        return nombre;
     }
 
     public String getGenero() {

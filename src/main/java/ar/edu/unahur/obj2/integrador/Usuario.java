@@ -56,4 +56,13 @@ public class Usuario {
                 .orElseThrow(
                     () -> new SugerenciaNoEncontradaException("No tenes sugeridas aún")));        
     }
+
+    public void agregarSugerencia(Pelicula pelicula){
+        sugerenciasAceptadas.add(pelicula);
+    }
+
+    public Boolean aceptaSugerencia(Pelicula pelicula){
+        return perfilCinefilo.aceptaSugerencia(pelicula);
+    }
+
 }
