@@ -65,4 +65,8 @@ public class Usuario {
         return perfilCinefilo.aceptaSugerencia(pelicula);
     }
 
+    public Boolean vistePelicula(Pelicula pelicula){
+        return peliculasVistas.contains(pelicula);
+    }
+
 }

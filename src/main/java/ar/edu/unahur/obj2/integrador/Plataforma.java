@@ -3,6 +3,7 @@ package ar.edu.unahur.obj2.integrador;
 import java.util.HashSet;
 import java.util.Set;
 
+import ar.edu.unahur.obj2.integrador.excepciones.SugerenciaNoEncontradaException;
 import ar.edu.unahur.obj2.integrador.observer.Observable;
 import ar.edu.unahur.obj2.integrador.observer.Observador;
 import ar.edu.unahur.obj2.integrador.observer.PeliculaDTO;
@@ -22,13 +23,13 @@ public class Plataforma implements Observable {
 
     void sugerir(){
         peliculas.stream()
-        .forEach(pelicula -> sugerirUnaPelicula(pelicula));
+            .forEach(pelicula -> sugerirUnaPelicula(pelicula));
     }
 
     void sugerirUnaPelicula(Pelicula pelicula){
         usuarios.stream()
-        .filter(u -> u.aceptaSugerencia(pelicula))
-        .forEach(u -> u.aceptaSugerencia(pelicula));
+            .filter(u -> u.aceptaSugerencia(pelicula) && !u.vistePelicula(pelicula))
+            .forEach(u -> u.aceptaSugerencia(pelicula));
     }
 
     @Override
@@ -45,5 +46,14 @@ public class Plataforma implements Observable {
     public void notificar(PeliculaDTO peliculaDTO) {
         observadores.forEach(
             o -> o.actualizar(peliculaDTO));
+    }
+
+    public void verPeliculaAlAzar(Usuario usuario){
+        try {
+            usuario.verPeliculaAlAzar();
+        } catch (SugerenciaNoEncontradaException e) {
+            //Mostrariamos mensaje al usuario
+            System.out.println(e.getMessage());
+        }
     }
 }
